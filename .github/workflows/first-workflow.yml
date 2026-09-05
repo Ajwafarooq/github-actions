@@ -8,8 +8,8 @@ jobs:
         - name: checkout repo
           uses: actions/checkout@v4
 
-        -name: list and readfile
+        - name: list and readfile
           run: |
-           echo "my github action job"
-           ls.ltra
-           cat README.md
+             echo "my github action job"
+             ls-ltra
+             cat README.md
