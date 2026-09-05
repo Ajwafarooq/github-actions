@@ -12,4 +12,5 @@ jobs:
           run: |
              echo "my github action job"
              ls -ltra
+             pwd
              cat README.md
