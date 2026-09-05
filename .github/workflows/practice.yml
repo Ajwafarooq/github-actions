@@ -9,7 +9,7 @@ jobs:
             - name: intall cowsay
               run: sudo apt-get install cowsay -y
             - name: exceute dragon file
-              run: cowsay -f dragon "this is running" >> dragon.txt
+              run: cowsay -f dragon " i am dragon ,this is running" >> dragon.txt
             - name: upload artifact 
               uses: actions/upload-artifact@v7
               with:
