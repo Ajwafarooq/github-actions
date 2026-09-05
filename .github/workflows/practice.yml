@@ -1,0 +1,52 @@
+name: practice workflow
+on: push 
+jobs:
+    build_job_1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+            - name: intall cowsay
+              run: sudo apt-get install cowsay -y
+            - name: exceute dragon file
+              run: cowsay -f dragon "this is running" >> dragon.txt
+            - name: upload artifact 
+              uses: actions/upload-artifact@v7
+              with:
+                 name: dragon-txt-file
+                 path: dragon.txt
+
+
+    test_job_2:
+        needs: build_job_1
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+
+            - name: download artifact
+              uses: actions/download-artifact@v8
+              with:
+                   name: dragon-txt-file 
+
+            - name: text file
+              run: grep -i "dragon" dragon.txt 
+
+
+    deploy_jobs_3:
+        needs: [test_job_2,build_job_1]
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+
+            - name: download artifact
+              uses: actions/download-artifact@v8
+              with:
+                   name: dragon-txt-file
+
+
+            - name: read and list files
+              run: |
+                 cat READme.md
+                 ls -ltra
