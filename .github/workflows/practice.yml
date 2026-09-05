@@ -48,5 +48,5 @@ jobs:
 
             - name: read and list files
               run: |
-                 cat READme.md
+                 cat README.md
                  ls -ltra
