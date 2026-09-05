@@ -11,5 +11,5 @@ jobs:
         - name: list and readfile
           run: |
              echo "my github action job"
-             ls-ltra
+             ls -ltra
              cat README.md
