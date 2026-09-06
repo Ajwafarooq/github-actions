@@ -11,7 +11,7 @@ jobs:
              - name: checkout repo
                uses: actions/checkout@v4
              - name: docker build
-               run:  echo docker build -t ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME:latest}}
+               run:  echo docker build -t ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME}}:latest
              - name: docker login
             #    env:
             #       DOCKER_PASSWORD :  34rtymi67m
@@ -21,7 +21,7 @@ jobs:
             #       username:  $DOCKER_USERNAME
             #       password: $DOCKER_PASSWORD 
              - name: docker publish
-               run:  echo docker push  ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME:latest}}
+               run:  echo docker push  ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME}}:latest
                
     deploy:
         needs: build
@@ -30,4 +30,4 @@ jobs:
              - name: checkout repo
                uses: actions/checkout@v4
              - name: docker run
-               run : echo  docker run -d -p 8000:80 ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME:latest}}
+               run : echo  docker run -d -p 8000:80 ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME}}:latest
