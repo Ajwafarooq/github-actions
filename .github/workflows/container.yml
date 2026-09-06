@@ -1,9 +1,9 @@
 name: docker container workflow
 on: push
-env:
-    CONTAINER_REGISTRY: docker.io
-    DOCKER_USERNAME: ajwa123
-    DOCKER_IMAGENAME: github-action-nginx
+# env:
+#     CONTAINER_REGISTRY: docker.io
+#     DOCKER_USERNAME: ajwa123
+#     DOCKER_IMAGENAME: github-action-nginx
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -11,17 +11,17 @@ jobs:
              - name: checkout repo
                uses: actions/checkout@v4
              - name: docker build
-               run:  echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGENAME:latest .
+               run:  echo docker build -t ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME:latest}}
              - name: docker login
-               env:
-                  DOCKER_PASSWORD :  34rtymi67m
-               run:  echo docker login --username $DOCKER_USERNAME  --password  $DOCKER_PASSWORD
+            #    env:
+            #       DOCKER_PASSWORD :  34rtymi67m
+               run:  echo docker login --username ${{vars.DOCKER_USERNAME}}  --password  ${{secrets.DOCKER_PASSWORD}}
             #    uses: docker/login-action@v3
             #    with:
             #       username:  $DOCKER_USERNAME
             #       password: $DOCKER_PASSWORD 
              - name: docker publish
-               run:  echo docker push  $CONTAINER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGENAME:latest
+               run:  echo docker push  ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME:latest}}
                
     deploy:
         needs: build
@@ -30,4 +30,4 @@ jobs:
              - name: checkout repo
                uses: actions/checkout@v4
              - name: docker run
-               run : echo  docker run -d -p 8000:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGENAME:latest
+               run : echo  docker run -d -p 8000:80 ${{vars.CONTAINER_REGISTRY}}/${{vars.DOCKER_USERNAME}}/${{vars.DOCKER_IMAGENAME:latest}}
