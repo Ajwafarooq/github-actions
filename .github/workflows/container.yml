@@ -11,7 +11,7 @@ jobs:
              - name: checkout repo
                uses: actions/checkout@v4
              - name: docker build
-               run:  docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGENAME:latest .
+               run:  docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$DOCKER_IMAGENAME:latest 
              - name: docker login
             #    env:
             #       DOCKER_PASSWORD :  34rtymi67m
